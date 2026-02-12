@@ -1,26 +1,175 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@theme {
+  /* Gold Luxury Palette */
+  --color-primary: #D4AF37;
+  --color-primary-light: #EEC956;
+  --color-primary-dark: #B08D1F;
+  --color-primary-foreground: #121212;
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  /* Dark Surfaces */
+  --color-background: #121212;
+  --color-surface: #1A1A1A;
+  --color-surface-light: #222222;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  /* Text Colors */
+  --color-foreground: #E5E5E5;
+  --color-muted-foreground: #9CA3AF;
+
+  /* Keeping some for component compat */
+  --color-secondary: #1A1A1A;
+  --color-secondary-foreground: #E5E5E5;
+  --color-accent: #D4AF37;
+  --color-accent-foreground: #121212;
+  --color-muted: #1A1A1A;
+  --color-card: #1A1A1A;
+  --color-card-foreground: #E5E5E5;
+
+  /* Fonts */
+  --font-display: var(--font-noto-serif);
+  --font-sans: var(--font-noto-serif);
+  --font-serif: var(--font-noto-serif);
+
+  /* Animations */
+  --animate-fade-in: fade-in 0.6s ease-out forwards;
+  --animate-slide-up: slide-up 0.6s ease-out forwards;
+  --animate-shine: shine 5s linear infinite;
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes slide-up {
+    from {
+      transform: translateY(30px);
+      opacity: 0;
+    }
+
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  @keyframes shine {
+    to {
+      background-position: 200% center;
+    }
+  }
+
+  @keyframes infinite-scroll {
+    from {
+      transform: translateX(0);
+    }
+
+    to {
+      transform: translateX(-50%);
+    }
   }
 }
 
+.animate-infinite-scroll {
+  animation: infinite-scroll 40s linear infinite;
+}
+
+/* Base Styles */
+html {
+  scroll-behavior: smooth;
+}
+
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: #121212;
+  color: #E5E5E5;
+  font-family: var(--font-noto-serif), serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-noto-serif), serif;
+}
+
+/* ===============================
+   GOLD FOIL SHIMMER TEXT
+   =============================== */
+.text-gold-foil {
+  background: linear-gradient(to right, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  background-size: 200% auto;
+  animation: shine 5s linear infinite;
+}
+
+/* ===============================
+   RADIAL GOLD DOT PATTERN
+   =============================== */
+.bg-dot-pattern {
+  background-image: radial-gradient(#D4AF37 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* ===============================
+   CUSTOM SCROLLBAR
+   =============================== */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #121212;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #D4AF37;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #EEC956;
+}
+
+/* ===============================
+   SELECTION
+   =============================== */
+::selection {
+  background: rgba(212, 175, 55, 0.3);
+  color: #ffffff;
+}
+
+/* ===============================
+   CONTAINER UTILITY
+   =============================== */
+.container {
+  max-width: 80rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+@media (min-width: 640px) {
+  .container {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
 }
